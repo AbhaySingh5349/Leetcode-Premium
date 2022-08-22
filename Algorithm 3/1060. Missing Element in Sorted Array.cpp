@@ -1,5 +1,7 @@
 Question Link: https://leetcode.com/problems/missing-element-in-sorted-array/
 
+// Approach 1:
+
 class Solution {
 public:
     int missingElement(vector<int>& a, int k) {
