@@ -1,5 +1,10 @@
 Question Link: https://leetcode.com/problems/open-the-lock/
 
+Time Complexity: O(N^2 * A^N + D)
+where A is number of digits in our alphabet, N is the number of digits in the lock, and D is the size of deadends. 
+We might visit every lock combination, plus we need to instantiate our set dead
+When we visit every lock combination, we spend O(N^2) time enumerating through and constructing each node.
+
 class Solution {
 public:
     
