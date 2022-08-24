@@ -4,13 +4,13 @@ class Solution {
 public:
     
     // Maximizing the minimum sub-array sum
-    bool isPossible(vector<int>& a, int maxSweetness, int k){
+    bool isPossible(vector<int>& a, int minSweetness, int k){
         int n=a.size();
         int c=0;
         int sweetness=0;
         for(int i=0;i<n;i++){
             sweetness += a[i];
-            if(sweetness >= maxSweetness){
+            if(sweetness >= minSweetness){
                 sweetness = 0;
                 c++;
             }
