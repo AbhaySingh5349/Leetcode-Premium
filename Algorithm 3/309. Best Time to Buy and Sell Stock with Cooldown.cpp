@@ -1,5 +1,6 @@
 Question Link: https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/
 
+// Approach 1:
 class Solution {
 public:
     
@@ -31,5 +32,30 @@ public:
     int maxProfit(vector<int>& prices) {
         vector<vector<int>> memo(prices.size(), vector<int>(2,-1));
         return solve(prices,0,0,memo);
+    }
+};
+
+// Approach 2:
+class Solution {
+public:
+    
+    int maxProfit(vector<int>& prices) {
+        int n=a.size();
+        if(n<2) return 0;
+        
+        int buy[n]; // max profit assuming buying at every index
+        int sell[n]; // max profit assuming selling at every index
+        
+        buy[0]=-a[0];
+        buy[1]=-min(a[0],a[1]);
+        
+        sell[0]=0;
+        sell[1]=max(0,a[1]-a[0]);
+        
+        for(int i=2;i<n;i++){
+            buy[i]=max(buy[i-1],sell[i-2]-a[i]);
+            sell[i]=max(sell[i-1],buy[i-1]+a[i]);
+        }
+        return sell[n-1];
     }
 };
