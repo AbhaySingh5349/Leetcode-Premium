@@ -18,7 +18,7 @@ public:
         vector<int> ans;
         for(int i=0;i<n;i++){
             char ch=s[i];
-            if(ch=='-' || ch=='+' || ch=='*'){
+            if(ch=='-' || ch=='+' || ch=='*'){ // breking string about 'operators'
                 vector<int> left=diffWaysToCompute(s.substr(0,i));
                 vector<int> right=diffWaysToCompute(s.substr(i+1));
                 
