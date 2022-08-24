@@ -1,5 +1,6 @@
 Question Link: https://leetcode.com/problems/split-array-largest-sum/
 
+// Approach 1: O(N^2 . K)
 class Solution {
 public:
     
@@ -29,5 +30,42 @@ public:
         for(int i=1;i<n;i++) presum[i]=presum[i-1]+a[i];
         
         return solve(a,presum,-1,k);
+    }
+};
+
+// Approach 2: 
+class Solution {
+public:
+    
+    // Minimizing the maximum sub-array sum
+    bool isPossible(vector<int>& a, int maxSum, int k){
+        int n=a.size();
+        int c=0;
+        int sum=0;
+        for(int i=0;i<n;i++){
+            sum += a[i];
+            if(sum > maxSum){
+                sum = a[i];
+                c++;
+            }
+        }
+        return (c<k);
+    }
+    
+    int splitArray(vector<int>& a, int k) {
+        int r=accumulate(a.begin(),a.end(),0);
+        
+        int l=*max_element(a.begin(),a.end());
+        
+        while(l<r){
+            int m = (r+l)/2;
+            
+            if(isPossible(a,m,k)){
+                r=m;
+            }else{
+                l=m+1;
+            }
+        }
+        return r;
     }
 };
