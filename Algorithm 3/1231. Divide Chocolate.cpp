@@ -3,6 +3,7 @@ Question Link: https://leetcode.com/problems/divide-chocolate/
 class Solution {
 public:
     
+    // Maximizing the minimum sub-array sum
     bool isPossible(vector<int>& a, int maxSweetness, int k){
         int n=a.size();
         int c=0;
