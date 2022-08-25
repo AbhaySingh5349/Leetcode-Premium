@@ -58,9 +58,13 @@ public:
         
         int ans=0;
         for(int i=0;i<n-1;i++){
-            ans=max(ans,left[i]+right[i+1]);
+            // considering 1 transaction
             ans=max(ans,max(left[i],right[i]));
+            
+            // considering 2 transactiona
+            ans=max(ans,left[i]+right[i+1]);
         }
+        ans=max(ans,left[n-1]);
         
         return ans;
     }
