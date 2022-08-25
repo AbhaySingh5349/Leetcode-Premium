@@ -1,5 +1,15 @@
 Question Link: https://leetcode.com/problems/palindrome-partitioning/
 
+Time Complexity : O(N * 2^N) where N is the length of string s.
+--> O(N) to generate each substring using substr
+--> 2^N in complexity is the number of nodes in the search tree (not the number of substrings)
+    a string with sequence of N chars can have max. N-1 partitions
+    If you want the partitioning to have 'R' substrings, then you can ask, "how many ways can I select 'R' partitions out of the 'N-1' partitions?" => (n-1)C(r)
+    In general a string of length n will have: (n-1)C(0) + (n-1)C(1) + ... + (n-1)C(n-2) = 2^(n-1) = O(2^n) partitionings
+    
+eg. If you want the partitioning to have 4 substrings from "abcde", then you can ask, "how many ways can I select 3 pipes out of the 4 partitions?"
+    answer is 4 choose 3, i.e. 4C3 = 4. The 4 ways to partition are: { {"a", "b", "c", "de"}, {"a", "b", "cd", "e"}, {"a", "bc", "d", "e"}, {"ab", "c", "d", "e"}
+
 class Solution {
 public:
     
