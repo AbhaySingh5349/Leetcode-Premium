@@ -1,5 +1,49 @@
 Question Link: https://leetcode.com/problems/dungeon-game/
 
+// Approach 1:
+class Solution {
+public:
+    
+    bool isPossible(vector<vector<int>>& grid, int val) {
+        int n=grid.size(), m=grid[0].size();
+        
+        vector<vector<int>> dp(n, vector<int> (m,INT_MIN));
+        
+        dp[0][0]=grid[0][0]+val;
+        
+        for(int i=0,j=1;j<m;j++){
+            if(dp[i][j-1]>0) dp[i][j]=max(dp[i][j],dp[i][j-1]+grid[i][j]);
+        }
+        for(int i=1,j=0;i<n;i++){
+            if(dp[i-1][j]>0) dp[i][j]=dp[i-1][j]+grid[i][j];
+        }
+        
+        for(int i=1;i<n;i++){
+            for(int j=1;j<m;j++){
+                if(dp[i-1][j]>0) dp[i][j]=dp[i-1][j]+grid[i][j];
+                if(dp[i][j-1]>0) dp[i][j]=max(dp[i][j],dp[i][j-1]+grid[i][j]);
+            }
+        }
+        return (dp[n-1][m-1]>0);
+    }
+    
+    int calculateMinimumHP(vector<vector<int>>& grid) {
+        int n=grid.size(), m=grid[0].size();
+        
+        int l=1, r=1e6;
+        while(l<r){
+            int m=l+(r-l)/2;
+            if(isPossible(grid,m)){
+                r=m;
+            }else{
+                l=m+1;
+            }
+        } 
+        return l;
+    }
+};
+
+// Approach 2:
 class Solution {
 public:
     
