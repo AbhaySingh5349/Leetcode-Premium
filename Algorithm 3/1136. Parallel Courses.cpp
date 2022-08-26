@@ -1,6 +1,9 @@
 Question Link: https://leetcode.com/problems/parallel-courses/
 
 // Approach 1: Depth-First Search: Check for Cycles + Find Longest Path
+
+--> For DFS, we spend O(N+E) since we need to visit every node and edge once in DFS in the worst case.
+
 class Solution {
 public:
     
