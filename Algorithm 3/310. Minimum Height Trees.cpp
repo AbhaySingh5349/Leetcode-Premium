@@ -75,6 +75,14 @@ public:
 };
 
 // Approach 2:
+
+--> Let |V| be the number of nodes in the graph, then the number of edges would be |V| - 1∣ as specified in the problem.
+--> First, it takes |V|-1 iterations for us to construct a graph, given the edges.
+--> With the constructed graph, we retrieve the initial leaf nodes, which takes |V| steps.
+--> During the BFS trimming process, we will trim out almost all the nodes (|V|∣V∣) and edges (|V|-1) from the edges.
+    Therefore, it would take us around |V| + |V| - 1 operations to reach the centroids.
+--> To sum up, the overall time complexity of the algorithm is \mathcal{O}(|V|)O(∣V∣).
+
 class Solution {
 public:
     vector<int> findMinHeightTrees(int n, vector<vector<int>>& edges) {
