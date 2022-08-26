@@ -1,5 +1,10 @@
 Question Link: https://leetcode.com/problems/longest-increasing-path-in-a-matrix/
 
+Time complexity : O(mn)
+--> Each vertex/cell will be calculated once and only once, and each edge will be visited once and only once. 
+--> total time complexity is then O(V+E)
+--> In our problem, O(V) = O(mn), O(E) = O(4V) = O(mn)
+    
 class Solution {
 public:
     int dxy[4][2]={{-1,0},{0,1},{1,0},{0,-1}};
