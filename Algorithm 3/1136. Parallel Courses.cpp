@@ -1,6 +1,6 @@
 Question Link: https://leetcode.com/problems/parallel-courses/
 
-// Approach 1:
+// Approach 1: Depth-First Search: Check for Cycles + Find Longest Path
 class Solution {
 public:
     
