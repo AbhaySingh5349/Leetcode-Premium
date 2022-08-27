@@ -39,7 +39,8 @@ Output:
 +-----------+-------------+
  
 // WRONG CODE
-SELECT player_id, event_date as first_login FROM Activity 
+SELECT player_id, event_date as first_login 
+FROM Activity 
 GROUP BY player_id
 HAVING MIN(event_date)   ** HAVING clause has to be followed by a condition **
 
@@ -49,5 +50,9 @@ FROM Activity
 GROUP BY player_id;
 
 // Approach 2:
-SELECT DISTINCT player_id, MIN(event_date) over (PARTITION BY player_id) first_login
+SELECT DISTINCT player_id, MIN(event_date) OVERr (PARTITION BY player_id) as first_login
 FROM Activity
+
+// Approach 3:
+SELECT DISTINCT player_id, FIRST_VALUE(event_date) OVER (PARTITION by player_id ORDER BY event_date) as first_login
+FROM Activity;
