@@ -39,11 +39,10 @@ Output:
 +-----------+-------------+
 
 // Approach 1:
-SELECT player_id,SUBSTR(MIN(event_date), 0, 10) as first_login 
+SELECT player_id, MIN(event_date) as first_login 
 FROM Activity 
 GROUP BY player_id;
 
 // Approach 2:
-SELECT player_id, TO_CHAR(MIN(event_date), 'YYYY-MM-DD') as first_login
+SELECT DISTINCT player_id, MIN(event_date) over (PARTITION BY player_id) first_login
 FROM Activity
-GROUP BY player_id
