@@ -37,6 +37,11 @@ Output:
 | 2         | 2017-06-25  |
 | 3         | 2016-03-02  |
 +-----------+-------------+
+ 
+// WRONG CODE
+SELECT player_id, event_date as first_login FROM Activity 
+GROUP BY player_id
+HAVING MIN(event_date)   ** HAVING clause has to be followed by a condition **
 
 // Approach 1:
 SELECT player_id, MIN(event_date) as first_login 
