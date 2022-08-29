@@ -72,7 +72,7 @@ Output:
 Explanation: Both employees with id 1 and 3 have the most experience among the employees of the first project. 
 For the second project, the employee with id 1 has the most experience.
 
-// Approach : Using commom table expression
+// Approach 1: Using commom table expression
 WITH cte as(
     SELECT p.project_id, p.employee_id, e.experience_years, MAX(e.experience_years) OVER (PARTITION BY p.project_id) as max_exp
     FROM Project p LEFT JOIN Employee e
@@ -82,3 +82,13 @@ WITH cte as(
 SELECT project_id, employee_id 
 FROM cte
 WHERE (experience_years = max_exp)
+
+// Approach 2: Using co-related subqueries
+SELECT p.project_id, e.employee_id
+FROM Project p LEFT JOIN Employee e ON p.employee_id = e.employee_id
+WHERE (project_id, experience_years) IN(SELECT project_id,MAX(experience_years)
+                                        FROM Project
+                                        JOIN Employee
+                                        USING(employee_id)
+                                        GROUP BY project_id
+                                        )
