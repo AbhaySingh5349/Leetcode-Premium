@@ -53,3 +53,4 @@ GROUP BY project_id
 HAVING COUNT(employee_id) = (SELECT MAX(p.cnt) FROM (SELECT COUNT(employee_id) as cnt
                                                    FROM Project
                                                    GROUP BY project_id) as p
+                            )
