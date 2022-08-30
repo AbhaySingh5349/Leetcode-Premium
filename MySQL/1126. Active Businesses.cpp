@@ -67,3 +67,14 @@ FROM cte
 WHERE occurences>avg_occurance
 GROUP BY business_id
 HAVING COUNT(event_type) > 1
+
+// Approach 2: Using JOIN
+SELECT business_id 
+FROM (SELECT event_type, avg(occurences) as avg_occurences   
+      FROM events as e1
+      GROUP BY event_type
+     ) as e1
+JOIN events as e2 ON e1.event_type = e2.event_type   
+WHERE e2.occurences > e1.avg_occurences             
+GROUP BY business_id
+HAVING COUNT(e1.event_type) > 1 
