@@ -73,7 +73,7 @@ WITH cte as(
     SELECT second_player as player_id, second_score as score FROM Matches
 ), Final_Scores as(
     SELECT p.group_id, p.player_id, SUM(c.score) as score
-    FROM Players p INNER JOIN cte c
+    FROM Players p LEFT JOIN cte c
     ON (p.player_id = c.player_id)
     GROUP BY p.player_id
 ), Final_Ranking as(
