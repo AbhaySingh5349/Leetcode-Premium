@@ -43,7 +43,7 @@ From 7 to 8 is contained in the table.
 Number 9 is missing from the table.
 Number 10 is contained in the table.
 
-// Approach 1: Using commom table expression
+// Approach : Using commom table expression
 WITH cte as(
     SELECT log_id, log_id-ROW_NUMBER() OVER (ORDER BY log_id) as diff
     FROM Logs
@@ -52,23 +52,3 @@ WITH cte as(
 SELECT MIN(log_id) as start_id, MAX(log_id) as end_id 
 FROM cte
 GROUP BY diff
-      
-
-// Approach 2: Using co-related subqueries
-SELECT seller_id FROM Sales
-                 GROUP BY seller_id
-                 HAVING SUM(PRICE) >= ALL (SELECT SUM(price)
-                                           FROM Sales
-                                           GROUP BY seller_id
-                                           )
-                                           
-                                           
-// Approach 3: Using co-related subqueries
-SELECT seller_id FROM Sales
-                 GROUP BY seller_id
-                 HAVING SUM(price) = (SELECT SUM(price)
-                                             FROM sales
-                                             GROUP BY seller_id
-                                             ORDER BY SUM(price) desc
-                                             LIMIT 1
-                                      )
