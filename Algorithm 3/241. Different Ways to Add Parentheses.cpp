@@ -13,12 +13,11 @@ public:
     
     vector<int> diffWaysToCompute(string s) {
         int n=s.length();
-        if(n==1) return {getVal(s)};
         
         vector<int> ans;
         for(int i=0;i<n;i++){
             char ch=s[i];
-            if(ch=='-' || ch=='+' || ch=='*'){ // breking string about 'operators'
+            if(ch=='-' || ch=='+' || ch=='*'){
                 vector<int> left=diffWaysToCompute(s.substr(0,i));
                 vector<int> right=diffWaysToCompute(s.substr(i+1));
                 
