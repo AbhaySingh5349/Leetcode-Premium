@@ -84,7 +84,7 @@ SELECT employee_id FROM Second_Layer_Report
 UNION
 SELECT employee_id FROM Third_Layer_Report
 
-WITH recursive Cte AS (
+WITH RECURSIVE cte AS (
     # Anchor
     SELECT employee_id, 0 as recursion_count
     FROM Employees
@@ -94,9 +94,10 @@ WITH recursive Cte AS (
     
     # Recursive no.
     SELECT e.employee_id, recursion_count+1
-    FROM CTE c INNER JOIN Employees e ON c.employee_id = e.manager_id
+    FROM cte c INNER JOIN Employees e ON c.employee_id = e.manager_id
     WHERE recursion_count < 2
 )
+
 
 SELECT employee_id
 FROM cte
