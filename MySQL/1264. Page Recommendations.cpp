@@ -92,8 +92,7 @@ WHERE page_id NOT IN (SELECT page_id FROM user_pages)
  
 // Approach 2: Using commom table expression
 WITH friends as(
-    SELECT CASE WHEN user1_id=1 THEN user2_id
-                ELSE user1_id
+    SELECT CASE WHEN user1_id=1 THEN user2_id ELSE user1_id
                 END as user_id
     FROM Friendship
     WHERE user1_id=1 OR user2_id=1
