@@ -88,9 +88,31 @@ WITH friends as(
 SELECT DISTINCT page_id as recommended_page
 FROM friends_pages
 WHERE page_id NOT IN (SELECT page_id FROM user_pages)
+                   
+ 
+// Approach 2: Using commom table expression
+WITH friends as(
+    SELECT CASE WHEN user1_id=1 THEN user2_id
+                ELSE user1_id
+                END as user_id
+    FROM Friendship
+    WHERE user1_id=1 OR user2_id=1
+), user_pages as(
+    SELECT page_id FROM Likes
+    WHERE user_id=1
+), friends_pages as(
+    SELECT l.page_id 
+    FROM Likes l RIGHT JOIN friends f
+    ON l.user_id = f.user_id 
+    WHERE l.page_id IS NOT NULL
+)
+
+SELECT DISTINCT page_id as recommended_page
+FROM friends_pages
+WHERE page_id NOT IN (SELECT page_id FROM user_pages)
+
                                            
-                                           
-// Approach 2: Using co-related subqueries
+// Approach 3: Using co-related subqueries
 SELECT DISTINCT page_id as recommended_page
 FROM (SELECT CASE WHEN user1_id=1 THEN user2_id
                   WHEN user2_id=1 THEN user1_id
