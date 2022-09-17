@@ -32,6 +32,11 @@ Output:
 | 2  | bob@example.com  |
 +----+------------------+
 Explanation: john@example.com is repeated two times. We keep the row with the smallest Id = 1.
+ 
+// WRONG APPROACH:
+DELETE FROM Person 
+WHERE Id NOT IN (SELECT MIN(Id) FROM Person GROUP BY Email)
+GROUP BY Email
 
 // Approach 1: Using Join
 DELETE p2
