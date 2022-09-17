@@ -27,9 +27,7 @@ Table: Department
 dept_id is the primary key column for this table.
 Each row of this table contains the id and the name of a department.
  
-
 Write an SQL query to report the respective department name and number of students majoring in each department for all departments in the Department table (even ones with no current students).
-
 Return the result table ordered by student_number in descending order. In case of a tie, order them by dept_name alphabetically.
 
 Input: 
@@ -77,3 +75,9 @@ RIGHT OUTER JOIN Department d
 ON (s.dept_id = d.dept_id)
 GROUP BY dept_name
 ORDER BY student_number DESC, d.dept_name ASC
+
+// Approach 4: Using Join
+SELECT d.dept_name, CASE WHEN s.dept_id IS NULL THEN 0 ELSE cnt END as student_number
+FROM (SELECT dept_id,COUNT(*) as cnt FROM Student GROUP BY dept_id) as s RIGHT JOIN Department d
+ON (s.dept_id = d.dept_id)
+ORDER BY student_number DESC, d.dept_name
