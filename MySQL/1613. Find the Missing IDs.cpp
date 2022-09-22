@@ -37,8 +37,12 @@ The maximum customer_id present in the table is 5, so in the range [1,5], IDs 2 
 
 // Approach 1: Using recursive common table expression
 WITH RECURSIVE cte AS (
+    # Anchor
     SELECT 1 as continued_id
+    
     UNION 
+    
+    # Recursive no.
     SELECT continued_id + 1
     FROM cte
     WHERE continued_id < (SELECT MAX(customer_id) FROM Customers) 
