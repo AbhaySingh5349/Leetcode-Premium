@@ -1,5 +1,7 @@
 Question Link: https://leetcode.com/problems/handshakes-that-dont-cross/
 
+
+// Approach 1:
 class Solution {
 public:
     
@@ -22,5 +24,30 @@ public:
             c %= mod;
         }
         return mp[n]=(int)c; 
+    }
+};
+
+
+// Approach 2: Catalan Numbers
+class Solution {
+public:
+    
+    #define ll long long
+    
+    const unsigned int mod=1000000007;
+    
+    int numberOfWays(int n) {        
+        int c = n/2;
+        int dp[c+1];
+        dp[0]=dp[1]=1;
+        for(int i=2;i<c+1;i++){
+            ll int c=0;
+            for(int j=0;j<i;j++){
+                c += ((ll)dp[j])*((ll)dp[i-1-j]);
+                c %= mod;
+            }
+            dp[i]=c;
+        }
+        return dp[c];
     }
 };
