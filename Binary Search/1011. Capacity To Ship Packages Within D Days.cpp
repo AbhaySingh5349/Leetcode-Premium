@@ -11,7 +11,7 @@ public:
         int c=1, s=a[0];
         for(int i=1;i<n;i++){
             s+=a[i];
-            if(s>maxWeight){
+            if(s>maxWeight){ // too heavy, wait for the next day
                 s=a[i];
                 c++;
             }
@@ -45,9 +45,9 @@ public:
         int n=a.size();
         
         int c=1, s=0;
-        for(int i=0;i<n;i++){
+        for(int i=0;i<n;i++){ 
             s+=a[i];
-            if(s>maxWeight){
+            if(s>maxWeight){ // too heavy, wait for the next day
                 s=a[i];
                 c++;
             }
