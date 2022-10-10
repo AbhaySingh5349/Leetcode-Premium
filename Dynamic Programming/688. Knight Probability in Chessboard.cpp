@@ -32,6 +32,8 @@ public:
 class Solution {
 public:
     
+    int dxy[8][2]={{-2,1},{-1,2},{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1}};
+    
     double knightProbability(int n, int k, int r, int c) {
         double dp[26][26][101];
         dp[r][c][0]=1;
