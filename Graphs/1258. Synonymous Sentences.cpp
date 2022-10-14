@@ -4,24 +4,24 @@ example: synonyms = [["happy","joy"],["sad","sorrow"],["joy","cheerful"]]
 		 text = "I am happy today but was sad yesterday"
 		 
 parent map: cheerful:cheerful
-			happy:cheerful
-			joy:happy
-			sad:sad
-			sorrow:sad
-			cheerful:cheerful
-			glad:cheerful
-			happy:happy
-			joy:happy
+	    happy:cheerful
+	    joy:happy
+	    sad:sad
+	    sorrow:sad
+	    cheerful:cheerful
+	    glad:cheerful
+	    happy:happy
+	    joy:happy
 
 relations map:  cheerful:cheerful , happy , joy 
-				happy:happy , joy 
-				joy:joy 
-				sad:sad , sorrow 
-				sorrow:sorrow 
-				cheerful:cheerful , glad 
-				glad:glad 
-				happy:happy , joy 
-				joy:joy 
+		happy:happy , joy 
+		joy:joy 
+		sad:sad , sorrow 
+		sorrow:sorrow 
+		cheerful:cheerful , glad 
+		glad:glad 
+		happy:happy , joy 
+		joy:joy 
 
 
 // Approach :                                            
