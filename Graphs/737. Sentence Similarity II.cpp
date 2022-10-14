@@ -1,5 +1,17 @@
 Question Link: https://leetcode.com/problems/sentence-similarity-ii/
 
+example:
+s1 = ["great","acting","skills"], s2 = ["fine","drama","talent"]
+pairs = [["great","good"],["fine","good"],["drama","acting"],["skills","talent"]]
+
+parent map: acting : drama
+            drama : drama
+            fine : fine
+            good : great
+            great : fine
+            skills : skills
+            talent : skills
+
 
 // Approach :                                            
 class Solution {
