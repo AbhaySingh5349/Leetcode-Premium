@@ -23,6 +23,9 @@ public:
             }
             
             x -= dxy[k][0], y -= dxy[k][1];
+            
+            if(x==i && y==j) continue;
+            
             if(possible(grid,x,y,destination)) return true;
         }
         return false;
