@@ -1,7 +1,56 @@
 Question Link: https://leetcode.com/problems/merge-k-sorted-lists/
 
 
-// Approach 1:                                            
+// Approach 1:
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    
+    struct node{
+        int val;
+        ListNode* node;
+    };
+    
+    struct compare{
+        bool operator()(const node &a, const node &b){
+            return a.val > b.val; // min. heap
+        }
+    };
+    
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if(lists.size() == 0) return NULL;
+        
+        priority_queue<node,vector<node>,compare> pq;
+        for(int i=0;i<lists.size();i++) if(lists[i] != NULL) pq.push({lists[i]->val,lists[i]});
+        
+        ListNode *head, *last;
+        head=last = new ListNode(-1);
+        
+        while(pq.size()>0){
+            struct node tp=pq.top();
+            pq.pop();
+            
+            last->next=tp.node;
+            last=last->next;
+            
+            if(tp.node->next) pq.push({tp.node->next->val,tp.node->next});
+        }
+        
+        return head->next;
+    }
+};
+
+
+// Approach 2:
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -51,54 +100,5 @@ public:
         
         int n=lists.size()-1;
         return mergeSort(lists,0,n);
-    }
-};
-
-
-// Approach 2:
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    
-    struct node{
-        int val;
-        ListNode* node;
-    };
-    
-    struct compare{
-        bool operator()(const node &a, const node &b){
-            return a.val > b.val; // min. heap
-        }
-    };
-    
-    ListNode* mergeKLists(vector<ListNode*>& lists) {
-        if(lists.size() == 0) return NULL;
-        
-        priority_queue<node,vector<node>,compare> pq;
-        for(int i=0;i<lists.size();i++) if(lists[i] != NULL) pq.push({lists[i]->val,lists[i]});
-        
-        ListNode *head, *last;
-        head=last = new ListNode(-1);
-        
-        while(pq.size()>0){
-            struct node tp=pq.top();
-            pq.pop();
-            
-            last->next=tp.node;
-            last=last->next;
-            
-            if(tp.node->next) pq.push({tp.node->next->val,tp.node->next});
-        }
-        
-        return head->next;
     }
 };
